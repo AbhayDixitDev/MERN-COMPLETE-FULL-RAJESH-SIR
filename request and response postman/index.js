@@ -3,9 +3,7 @@ const app = express();
 
 const stuRoute = require("./routes/studentRoute");
 app.use("/student",stuRoute);
-app.get("/student", (req, res) => {
-    res.send("Home page");
-})
+app.use("/teacher", require("./routes/teacherRoute"));
 
 
 app.listen(3000, () => {
