@@ -10,9 +10,15 @@ async function datasave(req, res){
             email:email
         }
     )
+    res.send("ok")
+}
+
+async function datashow(req, res){
+    const data = await StudentModel.find()
     res.send(data)
 }
 
 module.exports ={
-    datasave
+    datasave,
+    datashow
 }
