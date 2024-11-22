@@ -21,7 +21,13 @@ const dataDisplay=async(req, res)=>{
     res.send(myData);
 }
 
+const dataSearch=async(req,res)=>{
+    const myData = await StuModel.find(req.body)
+    res.send(myData)
+}
+
 module.exports={
     dataSave,
-    dataDisplay
+    dataDisplay,
+    dataSearch
 }
