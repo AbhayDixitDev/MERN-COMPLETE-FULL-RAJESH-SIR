@@ -26,8 +26,15 @@ const dataSearch=async(req,res)=>{
     res.send(myData)
 }
 
+const dataDelete=async(req, res)=>{
+    const {id}= req.body;
+    const myData= await StuModel.findByIdAndDelete(id);
+    res.send(myData);
+}
+
 module.exports={
     dataSave,
     dataDisplay,
-    dataSearch
+    dataSearch,
+    dataDelete
 }
