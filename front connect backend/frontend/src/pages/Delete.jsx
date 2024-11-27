@@ -2,8 +2,10 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import Table from 'react-bootstrap/Table';
 import Button from 'react-bootstrap/Button';
+import { useNavigate } from "react-router-dom";
 
 const Delete = () => {
+    const navigate = useNavigate();
     const [mydata, setMydata] = useState([]);
 
     const loadData = () => {
@@ -48,6 +50,9 @@ const Delete = () => {
                             <td>
                                 <Button variant="danger" onClick={() => handleDelete(item._id)}>
                                     Delete
+                                </Button>
+                                <Button variant="success" onClick={() => navigate(`/update/${item._id}`)} style={{marginLeft: "10px"}}>
+                                    Update
                                 </Button>
                             </td>
                         </tr>

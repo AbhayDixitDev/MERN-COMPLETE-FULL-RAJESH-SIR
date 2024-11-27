@@ -18,8 +18,11 @@ const  Layout=()=>{
             <Nav.Link as={Link} to="home">Home</Nav.Link>
             <Nav.Link as={Link} to="insert">Insert</Nav.Link> 
             <Nav.Link as={Link} to="display">Display</Nav.Link>
-            <Nav.Link as={Link} to="search">Search</Nav.Link>
-            <Nav.Link as={Link} to="delete">Delete</Nav.Link>
+            
+            <NavDropdown title="Actions" id="basic-nav-dropdown">
+            <NavDropdown.Item as={Link} to="search">Search</NavDropdown.Item>
+              <NavDropdown.Item as={Link} to="actions">Delete & Update</NavDropdown.Item>
+            </NavDropdown>
 
           </Nav>
         </Navbar.Collapse>

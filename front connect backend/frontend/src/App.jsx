@@ -5,6 +5,7 @@ import Insert from "./pages/Insert";
 import Display from "./pages/Display";
 import Search from "./pages/Search";
 import Delete from "./pages/Delete";
+import Update from "./pages/Update";
 
 const App=()=>{
   return(
@@ -17,7 +18,8 @@ const App=()=>{
               <Route path="insert" element={<Insert/>}/>
               <Route path="display" element={<Display/>}/>
               <Route path="search" element={<Search/>}/>
-              <Route path="delete" element={<Delete/>}/>
+              <Route path="actions" element={<Delete/>}/>  
+              <Route path="update/:id" element={<Update/>}/>  
             </Route>
           </Routes>
         </BrowserRouter>

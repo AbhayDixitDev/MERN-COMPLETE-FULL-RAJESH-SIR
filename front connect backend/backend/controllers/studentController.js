@@ -32,9 +32,24 @@ const dataDelete=async(req, res)=>{
     res.send(myData);
 }
 
+const dataShowUpdate=async(req, res)=>{
+    const {id}= req.query;
+    const myData= await StuModel.findById(id);
+    res.send(myData);
+}
+
+
+const dataUpdate=async(req, res)=>{
+    const {_id}= req.body;
+    const myData= await StuModel.findByIdAndUpdate(_id, req.body);
+    res.send(myData);
+}
+
 module.exports={
     dataSave,
     dataDisplay,
     dataSearch,
-    dataDelete
+    dataDelete,
+    dataShowUpdate,
+    dataUpdate
 }
