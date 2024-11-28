@@ -4,8 +4,10 @@ const bodyparser = require('body-parser')
 const cors= require("cors");
 const mongoose= require("mongoose");
 const stuRoute= require("./routes/studentRoute");
+require("dotenv").config();
+const Port = process.env.PORT || 8080   
 
-mongoose.connect("mongodb://127.0.0.1:27017/tanudb").then(()=>{
+mongoose.connect(process.env.DBCONNECT).then(()=>{
     console.log("DB connected!!!")
 })
 
@@ -13,9 +15,14 @@ app.use(bodyparser.urlencoded({ extended: true }))
 app.use(bodyparser.json())
 app.use(cors());
 
+app.use((req, res, next) => {
+    console.log("hello i am middleware");
+    next();
+});
+
 
 app.use("/students", stuRoute);
 
-app.listen(8080, ()=>{
-    console.log("server run on 8080")
+app.listen(Port, ()=>{
+    console.log(`server run on ${Port}`)
 })
