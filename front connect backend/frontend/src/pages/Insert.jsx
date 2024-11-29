@@ -1,10 +1,14 @@
 import { useState } from "react";
 import axios from "axios";
 import Form from 'react-bootstrap/Form';
+import Button from "react-bootstrap/esm/Button";
+import { useNavigate } from "react-router-dom";
+
 
 
 
 const Insert=()=>{
+    const navigate=useNavigate();
     const [input, setInput] =useState({})
 
 
@@ -17,8 +21,10 @@ const Insert=()=>{
     const handleSubmit=()=>{
         let api="http://localhost:8080/students/datasave";
         axios.post(api, input).then(()=>{
-            alert("data save!");
         })
+        alert("data save!");
+        navigate("/display");
+
     }
 
 
@@ -27,7 +33,7 @@ const Insert=()=>{
           <h1 style={{textAlign:"center"}}> Insert Data page</h1>
 
 
-          <Form style={{backgroundColor:"black",color:"white",width:"50%",padding:"20px",borderRadius:"10px",margin:"0 auto"}}>
+          <Form style={{backgroundColor:"black",color:"white",width:"25%",padding:"20px",borderRadius:"10px",margin:"0 auto"}}>
           <Form.Group className="mb-3" >
         <Form.Label>Roll Number</Form.Label>
         <Form.Control type="number" placeholder="enter your roll number " name="rollno" onChange={handleInput}  />
@@ -44,7 +50,9 @@ const Insert=()=>{
         <Form.Label>Fees</Form.Label>
         <Form.Control type="number" placeholder="enter your fess" name="fees" onChange={handleInput} />
         </Form.Group>
-        <button onClick={handleSubmit}> Data save!</button>
+        <div className="text-center">
+          <Button variant="primary" onClick={handleSubmit}>Data save!</Button>
+        </div>
 
      
     </Form>
