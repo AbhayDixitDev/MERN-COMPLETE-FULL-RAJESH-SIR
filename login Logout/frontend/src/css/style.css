@@ -1,0 +1,15 @@
+
+
+#headerData
+{
+  text-align:  right;
+}
+
+
+#myFooter
+{
+    background-color: lightgray;
+    height: 100px;
+    padding: 30px;
+    margin-top: 50px;
+}

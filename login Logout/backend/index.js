@@ -3,32 +3,22 @@ const app=express();
 const bodyparser = require('body-parser')
 const cors= require("cors");
 const mongoose= require("mongoose");
-const stuRoute= require("./routes/studentRoute");
+const UserRoute= require("./routes/userRoute");
+
 require("dotenv").config();
 
-const firstmiddleware = require("./middleware/firstmiddleware");
-const Port = process.env.PORT || 8080   
-
-mongoose.connect(process.env.DBCONNECT).then(()=>{
+const Port=process.env.PORT || 8000
+mongoose.connect(process.env.DBCONNECTION).then(()=>{
     console.log("DB connected!!!")
 })
-
+// Body-parser middleware
 app.use(bodyparser.urlencoded({ extended: true }))
 app.use(bodyparser.json())
 app.use(cors());
 
-app.use((req, res, next) => {
-    console.log("hello i am middleware");
-    next();
-});
-
-app.get("/students",firstmiddleware, (req, res) => {
-    res.send("hello world");
-});
+app.use("/users", UserRoute);
 
 
-app.use("/students", stuRoute);
-
-app.listen(Port, ()=>{
-    console.log(`server run on ${Port}`)
+app.listen(Port, ()=>{ 
+     console.log(`Server run on ${Port}`)
 })
