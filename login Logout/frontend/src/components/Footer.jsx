@@ -1,32 +1,38 @@
 import React from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
 import { FaClock, FaHistory, FaStopwatch, FaCalendarAlt } from 'react-icons/fa';
+import styled from 'styled-components';
+
+const FixedFooter = styled.footer`
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  background-color: #343a40;
+  color: white;
+  font-size: 0.8rem;
+  padding: 10px 0;
+`;
 
 const Footer = () => {
   const features = [
-    { icon: <FaClock />, title: 'Precision Timekeeping', description: 'Our clocks are engineered for ultimate accuracy' },
-    { icon: <FaHistory />, title: 'Rich Heritage', description: 'Centuries of clockmaking tradition in every piece' },
-    { icon: <FaStopwatch />, title: 'Modern Technology', description: 'Cutting-edge features meet classic design' },
-    { icon: <FaCalendarAlt />, title: 'Perpetual Calendars', description: 'Never miss a date with our advanced calendar systems' },
+    { icon: <FaClock />, title: 'Precision Timekeeping' },
+    { icon: <FaHistory />, title: 'Rich Heritage' },
+    { icon: <FaStopwatch />, title: 'Modern Technology' },
+    { icon: <FaCalendarAlt />, title: 'Perpetual Calendars' },
   ];
 
   return (
-    <footer className="bg-light text-center text-lg-start mt-5">
-      <Container className="p-4">
-        <Row>
-          <Col lg={6} md={12} className="mb-4 mb-md-0">
-            <h5 className="text-uppercase">About Chronos Timepieces</h5>
-            <p>
-              Discover the art of timekeeping with our exquisite collection of clocks and watches.
-              From classic grandfather clocks to modern smart watches, we offer a timeless blend of tradition and innovation.
-            </p>
+    <FixedFooter>
+      <Container>
+        <Row className="align-items-center">
+          <Col md={6} className="text-center text-md-start">
+            <small>© {new Date().getFullYear()} Chronos Timepieces</small>
           </Col>
-          <Col lg={6} md={12} className="mb-4 mb-md-0">
-            <h5 className="text-uppercase">Our Features</h5>
-            <ul className="list-unstyled mb-0">
+          <Col md={6}>
+            <ul className="list-inline mb-0 text-center text-md-end">
               {features.map((feature, index) => (
-                <li key={index} className="mb-2">
-                  <span className="me-2">{feature.icon}</span>
+                <li key={index} className="list-inline-item me-3">
+                  <span className="me-1">{feature.icon}</span>
                   {feature.title}
                 </li>
               ))}
@@ -34,11 +40,7 @@ const Footer = () => {
           </Col>
         </Row>
       </Container>
-      <div className="text-center p-3" style={{ backgroundColor: 'rgba(0, 0, 0, 0.2)' }}>
-        © {new Date().getFullYear()} Copyright:
-        <a className="text-dark" href="#!"> Chronos Timepieces</a>
-      </div>
-    </footer>
+    </FixedFooter>
   );
 }
 

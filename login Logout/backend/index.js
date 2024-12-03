@@ -7,7 +7,7 @@ const UserRoute= require("./routes/userRoute");
 
 require("dotenv").config();
 
-const Port=process.env.PORT || 8000
+const Port=process.env.PORT || 8080
 mongoose.connect(process.env.DBCONNECTION).then(()=>{
     console.log("DB connected!!!")
 })
