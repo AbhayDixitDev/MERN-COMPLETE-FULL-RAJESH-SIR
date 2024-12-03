@@ -7,9 +7,7 @@ const Layout=()=>{
         <>
          <Header/>
          <Topmenu/>
-
          <Outlet/>
-
          <Footer/>
           
         </>
