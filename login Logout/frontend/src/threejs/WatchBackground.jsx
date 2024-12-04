@@ -6,6 +6,7 @@ import { TextGeometry } from 'three/examples/jsm/geometries/TextGeometry';
 const WatchBackground = () => {
   const mountRef = useRef(null);
   const [font, setFont] = useState(null);
+  let x = 10;
 
   useEffect(() => {
     const scene = new THREE.Scene();
