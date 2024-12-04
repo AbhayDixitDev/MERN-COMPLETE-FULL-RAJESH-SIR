@@ -4,6 +4,7 @@ const bodyparser = require('body-parser')
 const cors= require("cors");
 const mongoose= require("mongoose");
 const UserRoute= require("./routes/userRoute");
+const AdminRoute= require("./routes/adminRoute");
 
 require("dotenv").config();
 
@@ -17,6 +18,7 @@ app.use(bodyparser.json())
 app.use(cors());
 
 app.use("/users", UserRoute);
+app.use("/admin", AdminRoute);
 
 
 app.listen(Port, ()=>{ 
