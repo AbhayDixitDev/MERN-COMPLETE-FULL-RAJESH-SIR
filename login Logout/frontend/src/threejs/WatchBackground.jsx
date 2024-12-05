@@ -1,4 +1,4 @@
-import React, { useRef, useEffect, useState } from 'react';
+import React, { useRef, useEffect, useState, useMemo } from 'react';
 import * as THREE from 'three';
 import { FontLoader } from 'three/examples/jsm/loaders/FontLoader';
 import { TextGeometry } from 'three/examples/jsm/geometries/TextGeometry';
@@ -6,12 +6,11 @@ import { TextGeometry } from 'three/examples/jsm/geometries/TextGeometry';
 const WatchBackground = () => {
   const mountRef = useRef(null);
   const [font, setFont] = useState(null);
-  let x = 10;
+  const renderer = useMemo(() => new THREE.WebGLRenderer({ alpha: true }), []);
 
   useEffect(() => {
     const scene = new THREE.Scene();
     const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-    const renderer = new THREE.WebGLRenderer({ alpha: true });
 
     renderer.setSize(window.innerWidth, window.innerHeight);
     mountRef.current?.appendChild(renderer.domElement);
@@ -32,7 +31,7 @@ const WatchBackground = () => {
       const hourHandMaterial = new THREE.MeshPhongMaterial({ color: 0xff0000 });
       const minuteHandMaterial = new THREE.MeshPhongMaterial({ color: 0x0000ff });
       
-      const hourHandGeometry = new THREE.BoxGeometry(0.1, 2, 0.1);
+      const hourHandGeometry = new THREE.BoxGeometry(0.1, 3, 0.5);
       const hourHand = new THREE.Mesh(hourHandGeometry, hourHandMaterial);
       hourHand.position.z = 0.2;
       clock.add(hourHand);
@@ -52,18 +51,20 @@ const WatchBackground = () => {
 
     const wallClock = createWallClock();
     scene.add(wallClock);
-    camera.position.z = 15;
+    camera.position.z = 10;
 
-    const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
+    const ambientLight = new THREE.AmbientLight(0xffffff, 1);
     scene.add(ambientLight);
 
-    const directionalLight = new THREE.DirectionalLight(0xffffff, 0.5);
-    directionalLight.position.set(5, 5, 5);
+    const directionalLight = new THREE.DirectionalLight(0xffffff, 1);
+    directionalLight.position.set(20, 20, 20);
     scene.add(directionalLight);
 
     const loader = new FontLoader();
-    loader.load('https://threejs.org/examples/fonts/helvetiker_regular.typeface.json', (loadedFont) => {
+    loader.load('/fonts/helvetiker_regular.typeface.json', (loadedFont) => {
       setFont(loadedFont);
+    }, undefined, (error) => {
+      console.error('An error occurred while loading the font:', error);
     });
 
     const createText = (text, size, x, y, rotationAngle) => {
@@ -73,7 +74,7 @@ const WatchBackground = () => {
         size: size,
         height: 0.1,
       });
-      const textMaterial = new THREE.MeshPhongMaterial({ color: 0xffffff });
+      const textMaterial = new THREE.MeshPhongMaterial({ color: 0xff0000 });
       const textMesh = new THREE.Mesh(textGeometry, textMaterial);
       textMesh.position.set(x, y, 0.1);
       textMesh.rotation.z = rotationAngle;
@@ -132,8 +133,9 @@ const WatchBackground = () => {
     return () => {
       window.removeEventListener('resize', handleResize);
       mountRef.current?.removeChild(renderer.domElement);
+      renderer.dispose();
     };
-  }, [font]);
+  }, [font, renderer]);
 
   return <div ref={mountRef} style={{ position: 'fixed', top: 0, left: 500, width: '100%', height: '100%', zIndex: -1 }} />;
 };

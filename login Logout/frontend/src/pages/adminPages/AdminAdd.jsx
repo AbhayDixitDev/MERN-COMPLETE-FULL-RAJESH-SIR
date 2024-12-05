@@ -38,24 +38,23 @@ const AdminAdd = () => {
     }
 
     try {
-      await axios.post('http://localhost:8080/products/add', formData, {
+      const response = await axios.post('http://localhost:8080/admin/products/add', formData, {
         headers: { 'Content-Type': 'multipart/form-data' }
       });
-      alert('Product added successfully!');
+      console.log('Product added:', response.data);
       setProduct({ name: '', brand: '', price: '', description: '', image: null });
       if (fileInputRef.current) {
         fileInputRef.current.value = '';
       }
     } catch (error) {
-      console.error('Error adding product:', error);
-      alert('Failed to add product. Please try again.');
+      console.error('Error adding product:', error.response?.data || error.message);
     }
   };
 
   return (
     <Container fluid className="admin-add-container">
       <WatchBackground />
-      <Row className="justify-content-center align-items-center" style={{ minHeight: '100vh',marginTop:"-50rem" }}>
+      <Row className="justify-content-center align-items-center" style={{ minHeight: '100vh', marginTop: "-50rem" }}>
         <Col md={6} lg={4}>
           <div className="bg-light p-4 rounded shadow" style={{ position: 'relative', zIndex: 1 }}>
             <h2 className="text-center mb-4"><FaPlus /> Add New Watch</h2>
